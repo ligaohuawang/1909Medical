@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.TProductOrderMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.entity.TProductOrder">
+    <id column="order_number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="shouhuorenPhone" jdbcType="VARCHAR" property="shouhuorenphone" />
+    <result column="order_price" jdbcType="DOUBLE" property="orderPrice" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="address_id" jdbcType="INTEGER" property="addressId" />
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
+    <result column="express_method" jdbcType="VARCHAR" property="expressMethod" />
+    <result column="shouhuoren" jdbcType="VARCHAR" property="shouhuoren" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_number, shouhuorenPhone, order_price, create_time, order_status, uid, address_id, 
+    pay_method, express_method, shouhuoren, pid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product_order
+    where order_number = #{orderNumber,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_product_order
+    where order_number = #{orderNumber,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.entity.TProductOrder">
+    insert into t_product_order (order_number, shouhuorenPhone, order_price, 
+      create_time, order_status, uid, 
+      address_id, pay_method, express_method, 
+      shouhuoren, pid)
+    values (#{orderNumber,jdbcType=INTEGER}, #{shouhuorenphone,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=DATE}, #{orderStatus,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{addressId,jdbcType=INTEGER}, #{payMethod,jdbcType=VARCHAR}, #{expressMethod,jdbcType=VARCHAR}, 
+      #{shouhuoren,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.entity.TProductOrder">
+    insert into t_product_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="shouhuorenphone != null">
+        shouhuorenPhone,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="payMethod != null">
+        pay_method,
+      </if>
+      <if test="expressMethod != null">
+        express_method,
+      </if>
+      <if test="shouhuoren != null">
+        shouhuoren,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="shouhuorenphone != null">
+        #{shouhuorenphone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="payMethod != null">
+        #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="expressMethod != null">
+        #{expressMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhuoren != null">
+        #{shouhuoren,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.TProductOrder">
+    update t_product_order
+    <set>
+      <if test="shouhuorenphone != null">
+        shouhuorenPhone = #{shouhuorenphone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="payMethod != null">
+        pay_method = #{payMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="expressMethod != null">
+        express_method = #{expressMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhuoren != null">
+        shouhuoren = #{shouhuoren,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_number = #{orderNumber,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.entity.TProductOrder">
+    update t_product_order
+    set shouhuorenPhone = #{shouhuorenphone,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=DATE},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      address_id = #{addressId,jdbcType=INTEGER},
+      pay_method = #{payMethod,jdbcType=VARCHAR},
+      express_method = #{expressMethod,jdbcType=VARCHAR},
+      shouhuoren = #{shouhuoren,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER}
+    where order_number = #{orderNumber,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertProductOrder" useGeneratedKeys="true" keyProperty="orderNumber">
+ INSERT INTO t_product_order VALUES (null,#{shouhuorenphone},#{orderPrice},#{createTime},#{orderStatus},#{uid},#{addressId},#{payMethod},#{expressMethod},#{shouhuoren},null)
+  </insert>
+
+
+  <select id="selectByContentAndUid" resultMap="BaseResultMap">
+    SELECT * FROM t_product_order WHERE uid = #{uid}
+    <if test=" zxos !=null and zxos !='' ">
+      AND order_status = #{zxos}
+    </if>
+  </select>
+
+  <select id="selectProductOrderByorderNumber" resultMap="BaseResultMap">
+    SELECT * from t_product_order where order_number = #{orderNumber}
+  </select>
+
+  <!--<delete id="deleteProductOrderByorderNumber">
+      DELETE FROM t_product_order WHERE order_number = #{orderNumber}
+  </delete>-->
+
+  <update id="deleteProductOrderByorderNumber">
+UPDATE t_product_order SET order_status = 1 WHERE order_number = #{orderNumber}
+  </update>
+</mapper>

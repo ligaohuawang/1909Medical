@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.TZxnewsMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.entity.TZxnews">
+    <id column="nid" jdbcType="INTEGER" property="nid" />
+    <result column="zxoid" jdbcType="INTEGER" property="zxoid" />
+    <result column="zxname" jdbcType="VARCHAR" property="zxname" />
+    <result column="zxsex" jdbcType="INTEGER" property="zxsex" />
+    <result column="zxbirthday" jdbcType="DATE" property="zxbirthday" />
+    <result column="zxaddress" jdbcType="VARCHAR" property="zxaddress" />
+    <result column="starttime" jdbcType="DATE" property="starttime" />
+    <result column="bftime" jdbcType="DOUBLE" property="bftime" />
+    <result column="zxaim" jdbcType="VARCHAR" property="zxaim" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    nid, zxoid, zxname, zxsex, zxbirthday, zxaddress, starttime, bftime, zxaim
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_zxnews
+    where nid = #{nid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_zxnews
+    where nid = #{nid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.entity.TZxnews">
+    insert into t_zxnews (nid, zxoid, zxname, 
+      zxsex, zxbirthday, zxaddress, 
+      starttime, bftime, zxaim
+      )
+    values (#{nid,jdbcType=INTEGER}, #{zxoid,jdbcType=INTEGER}, #{zxname,jdbcType=VARCHAR}, 
+      #{zxsex,jdbcType=INTEGER}, #{zxbirthday,jdbcType=VARCHAR}, #{zxaddress,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=VARCHAR}, #{bftime,jdbcType=VARCHAR}, #{zxaim,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.entity.TZxnews">
+    insert into t_zxnews
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nid != null">
+        nid,
+      </if>
+      <if test="zxoid != null">
+        zxoid,
+      </if>
+      <if test="zxname != null">
+        zxname,
+      </if>
+      <if test="zxsex != null">
+        zxsex,
+      </if>
+      <if test="zxbirthday != null">
+        zxbirthday,
+      </if>
+      <if test="zxaddress != null">
+        zxaddress,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="bftime != null">
+        bftime,
+      </if>
+      <if test="zxaim != null">
+        zxaim,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nid != null">
+        #{nid,jdbcType=INTEGER},
+      </if>
+      <if test="zxoid != null">
+        #{zxoid,jdbcType=INTEGER},
+      </if>
+      <if test="zxname != null">
+        #{zxname,jdbcType=VARCHAR},
+      </if>
+      <if test="zxsex != null">
+        #{zxsex,jdbcType=INTEGER},
+      </if>
+      <if test="zxbirthday != null">
+        #{zxbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="zxaddress != null">
+        #{zxaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="bftime != null">
+        #{bftime,jdbcType=VARCHAR},
+      </if>
+      <if test="zxaim != null">
+        #{zxaim,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.TZxnews">
+    update t_zxnews
+    <set>
+      <if test="zxoid != null">
+        zxoid = #{zxoid,jdbcType=INTEGER},
+      </if>
+      <if test="zxname != null">
+        zxname = #{zxname,jdbcType=VARCHAR},
+      </if>
+      <if test="zxsex != null">
+        zxsex = #{zxsex,jdbcType=INTEGER},
+      </if>
+      <if test="zxbirthday != null">
+        zxbirthday = #{zxbirthday,jdbcType=VARCHAR},
+      </if>
+      <if test="zxaddress != null">
+        zxaddress = #{zxaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="bftime != null">
+        bftime = #{bftime,jdbcType=VARCHAR},
+      </if>
+      <if test="zxaim != null">
+        zxaim = #{zxaim,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.entity.TZxnews">
+    update t_zxnews
+    set zxoid = #{zxoid,jdbcType=INTEGER},
+      zxname = #{zxname,jdbcType=VARCHAR},
+      zxsex = #{zxsex,jdbcType=INTEGER},
+      zxbirthday = #{zxbirthday,jdbcType=VARCHAR},
+      zxaddress = #{zxaddress,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=VARCHAR},
+      bftime = #{bftime,jdbcType=VARCHAR},
+      zxaim = #{zxaim,jdbcType=VARCHAR}
+    where nid = #{nid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selItem" resultType="TItem">
+    SELECT * FROM t_item WHERE xmstate=1
+  </select>
+
+  <select id="selDoctor" resultType="TDoctor" parameterType="string">
+    SELECT * FROM t_doctor WHERE dstate=1 AND droom=#{xmname}
+  </select>
+
+  <!--添加咨询订单信息-->
+  <insert id="insOrder" parameterType="tZxorder" useGeneratedKeys="true" keyProperty="zxoid">
+    INSERT INTO t_zxorder VALUES (null,#{xmname},#{uid},#{dname},#{xmprice},#{createtime},#{ostate},#{cancel})
+  </insert>
+
+  <!--添加咨询信息-->
+  <insert id="insmeans" parameterType="TZxnews">
+    INSERT INTO t_zxnews VALUES (NULL,#{zxoid},#{zxname},#{zxsex},#{zxbirthday},#{zxaddress},#{starttime},#{bftime},#{zxaim})
+  </insert>
+
+  <!--修改咨询订单状态-->
+  <update id="updOrder">
+    UPDATE t_zxorder SET 
+    <if test="tidings =='confirm'">
+      ostate=${1} WHERE zxoid = #{zxoid}
+    </if>
+    <if test="tidings =='cancel'">
+      cancel=${0} WHERE zxoid = #{zxoid}
+    </if>
+  </update>
+
+  <!--添加历史病例-->
+  <insert id="insTMedicalHistory" parameterType="TMedicalHistory">
+    INSERT INTO t_medical_history(uid,zxname,hname,hhospital,hhow,hdoctor) VALUES (#{uid},#{zxname},#{hname},#{hhospital},#{hhow},#{hdoctor})
+  </insert>
+</mapper>

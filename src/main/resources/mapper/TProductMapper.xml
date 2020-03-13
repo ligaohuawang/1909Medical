@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.TProductMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.entity.TProduct">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="ptype" jdbcType="INTEGER" property="ptype" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="pintroduction" jdbcType="VARCHAR" property="pintroduction" />
+    <result column="pspecification" jdbcType="VARCHAR" property="pspecification" />
+    <result column="pfunction" jdbcType="VARCHAR" property="pfunction" />
+    <result column="ppicture" jdbcType="VARCHAR" property="ppicture" />
+    <result column="pstate" jdbcType="INTEGER" property="pstate" />
+    <result column="pbrand" jdbcType="VARCHAR" property="pbrand" />
+    <result column="pptype" jdbcType="INTEGER" property="pptype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, pname, ptype, price, pintroduction, pspecification, pfunction, ppicture, pstate, 
+    pbrand, pptype
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_product
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_product
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.entity.TProduct">
+    insert into t_product (pid, pname, ptype, 
+      price, pintroduction, pspecification, 
+      pfunction, ppicture, pstate, 
+      pbrand, pptype)
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{ptype,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{pintroduction,jdbcType=VARCHAR}, #{pspecification,jdbcType=VARCHAR}, 
+      #{pfunction,jdbcType=VARCHAR}, #{ppicture,jdbcType=VARCHAR}, #{pstate,jdbcType=INTEGER}, 
+      #{pbrand,jdbcType=VARCHAR}, #{pptype,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.entity.TProduct">
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="ptype != null">
+        ptype,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="pintroduction != null">
+        pintroduction,
+      </if>
+      <if test="pspecification != null">
+        pspecification,
+      </if>
+      <if test="pfunction != null">
+        pfunction,
+      </if>
+      <if test="ppicture != null">
+        ppicture,
+      </if>
+      <if test="pstate != null">
+        pstate,
+      </if>
+      <if test="pbrand != null">
+        pbrand,
+      </if>
+      <if test="pptype != null">
+        pptype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null">
+        #{ptype,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="pintroduction != null">
+        #{pintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="pspecification != null">
+        #{pspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="pfunction != null">
+        #{pfunction,jdbcType=VARCHAR},
+      </if>
+      <if test="ppicture != null">
+        #{ppicture,jdbcType=VARCHAR},
+      </if>
+      <if test="pstate != null">
+        #{pstate,jdbcType=INTEGER},
+      </if>
+      <if test="pbrand != null">
+        #{pbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pptype != null">
+        #{pptype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.TProduct">
+    update t_product
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null">
+        ptype = #{ptype,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="pintroduction != null">
+        pintroduction = #{pintroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="pspecification != null">
+        pspecification = #{pspecification,jdbcType=VARCHAR},
+      </if>
+      <if test="pfunction != null">
+        pfunction = #{pfunction,jdbcType=VARCHAR},
+      </if>
+      <if test="ppicture != null">
+        ppicture = #{ppicture,jdbcType=VARCHAR},
+      </if>
+      <if test="pstate != null">
+        pstate = #{pstate,jdbcType=INTEGER},
+      </if>
+      <if test="pbrand != null">
+        pbrand = #{pbrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pptype != null">
+        pptype = #{pptype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.entity.TProduct">
+    update t_product
+    set pname = #{pname,jdbcType=VARCHAR},
+      ptype = #{ptype,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      pintroduction = #{pintroduction,jdbcType=VARCHAR},
+      pspecification = #{pspecification,jdbcType=VARCHAR},
+      pfunction = #{pfunction,jdbcType=VARCHAR},
+      ppicture = #{ppicture,jdbcType=VARCHAR},
+      pstate = #{pstate,jdbcType=INTEGER},
+      pbrand = #{pbrand,jdbcType=VARCHAR},
+      pptype = #{pptype,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryProductList" resultMap="BaseResultMap">
+    select a.pid , a.pname , a.price , a.pintroduction , a.pspecification , a.pfunction , a.ppicture , a.pbrand , a.pptype , b.ptname as ptype
+    from t_product a ,t_producttype b where a.ptype = b.ptid and a.pstate = 1
+    <if test="ptype != null and ptype != '' "> and ptname=#{ptype}</if>
+    <if test="pbrand != null and pbrand != '' "> and pbrand = #{pbrand}</if>
+    <if test="pfunction != null and pfunction != '' ">and pfunction = #{pfunction}</if>
+    <if test="pptype != 0 and pptype != '' ">and pptype = #{pptype}</if>
+
+  </select>
+
+  <select id="queryType" resultType="string">
+   select ptname from t_producttype where ptparentid = #{pptype} and ptstate = 1
+  </select>
+  <select id="queryFunction" resultType="string">
+    SELECT distinct pfunction from t_product where pstate = 1 and pptype=#{pptype}
+  </select>
+  <select id="queryBrand" resultType="string">
+    SELECT distinct pbrand from t_product where pstate = 1 and pptype=#{pptype}
+  </select>
+
+<select id="queryProductById" resultMap="BaseResultMap">
+  SELECT * FROM  t_product where pid=#{pid} and pstate = 1
+</select>
+
+  <select id="selectProductFromByUidAndPid"  resultType="com.qianfeng.pojo.ConfirmOrder">
+    select s.number ,p.* from t_shopcar s LEFT JOIN t_product p on p.pid=s.pid WHERE s.pid in
+    (<foreach collection="idArray" item="id" separator=",">
+    #{id}
+  </foreach> )
+    and uid=#{uid}
+  </select>
+</mapper>

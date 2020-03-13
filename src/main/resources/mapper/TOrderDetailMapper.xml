@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.TOrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.entity.TOrderDetail">
+    <id column="odid" jdbcType="INTEGER" property="odid" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="order_price" jdbcType="DOUBLE" property="orderPrice" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="ppicture" jdbcType="VARCHAR" property="ppicture" />
+    <result column="order_number" jdbcType="INTEGER" property="orderNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    odid, number, pid, order_price, pname, ppicture, order_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_detail
+    where odid = #{odid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_detail
+    where odid = #{odid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.entity.TOrderDetail">
+    insert into t_order_detail (odid, number, pid, 
+      order_price, pname, ppicture, 
+      order_number)
+    values (#{odid,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{orderPrice,jdbcType=DOUBLE}, #{pname,jdbcType=VARCHAR}, #{ppicture,jdbcType=VARCHAR}, 
+      #{orderNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.entity.TOrderDetail">
+    insert into t_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="odid != null">
+        odid,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="ppicture != null">
+        ppicture,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="odid != null">
+        #{odid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ppicture != null">
+        #{ppicture,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.TOrderDetail">
+    update t_order_detail
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ppicture != null">
+        ppicture = #{ppicture,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where odid = #{odid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.entity.TOrderDetail">
+    update t_order_detail
+    set number = #{number,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      pname = #{pname,jdbcType=VARCHAR},
+      ppicture = #{ppicture,jdbcType=VARCHAR},
+      order_number = #{orderNumber,jdbcType=INTEGER}
+    where odid = #{odid,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertOrderDetail">
+    INSERT INTO t_order_detail VALUES (null,#{number},#{pid},#{orderPrice},#{pname},#{ppicture},#{orderNumber})
+  </insert>
+
+  <select id="selectAllfromOrderDetailByOrderNumber" resultMap="BaseResultMap">
+    SELECT * FROM t_order_detail WHERE order_number = #{orderNumber}
+    <if test=" zxos !=null and zxos !='' ">
+      AND order_status = #{zxos}
+    </if>
+  </select>
+
+ <!-- <delete id="deleteDeatilByorderNumber">
+  DELETE FROM t_order_detail WHERE order_number = #{orderNumber}
+  </delete>-->
+ <!-- <update id="deleteDeatilByorderNumber">
+    UPDATE t_product_order SET order_status = 1 WHERE order_number = #{orderNumber}
+  </update>-->
+
+</mapper>

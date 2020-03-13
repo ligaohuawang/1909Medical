@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.TShopcarMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.entity.TShopcar">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="sprice" jdbcType="DOUBLE" property="sprice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, pid, uid, number, sprice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_shopcar
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_shopcar
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.entity.TShopcar">
+    insert into t_shopcar (sid, pid, uid, 
+      number, sprice)
+    values (#{sid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{sprice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.entity.TShopcar">
+    insert into t_shopcar
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="sprice != null">
+        sprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="sprice != null">
+        #{sprice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.TShopcar">
+    update t_shopcar
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="sprice != null">
+        sprice = #{sprice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.entity.TShopcar">
+    update t_shopcar
+    set pid = #{pid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      sprice = #{sprice,jdbcType=DOUBLE}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+<select id="queryShopcar" resultType="com.qianfeng.model.ShopcarModel">
+  SELECT  sid,b.pid,ppicture,pname,price,number
+  FROM  t_shopcar a ,t_product b where a.pid = b.pid and sstate = 1 and a.uid=#{uid}
+</select>
+
+  <insert id="addShopcar" >
+    INSERT INTO t_shopcar(pid,uid,number) VALUES (#{pid},#{uid},#{number})
+  </insert>
+
+  <update id="addNumber" >
+    UPDATE t_shopcar SET number=number+1 where sid=#{sid} and sstate = 1
+  </update>
+  <update id="cutNumber" >
+    UPDATE t_shopcar SET number=number-1 where sid=#{sid} and sstate = 1
+  </update>
+<!--删除购物车中的商品-->
+  <delete id="deleteProductByUidAndPid">
+DELETE FROM t_shopcar WHERE uid=#{uid} AND pid=#{pid}
+  </delete>
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.mapper.TZxorderMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.entity.TZxorder">
+    <id column="zxoid" jdbcType="INTEGER" property="zxoid" />
+    <result column="xmname" jdbcType="VARCHAR" property="xmname" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="dname" jdbcType="VARCHAR" property="dname" />
+    <result column="xmprice" jdbcType="DOUBLE" property="xmprice" />
+    <result column="createtime" jdbcType="DATE" property="createtime" />
+    <result column="ostate" jdbcType="INTEGER" property="ostate" />
+    <result column="cancel" jdbcType="INTEGER" property="cancel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    zxoid, xmname, uid, dname, xmprice, createtime, ostate, cancel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_zxorder
+    where zxoid = #{zxoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_zxorder
+    where zxoid = #{zxoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qianfeng.entity.TZxorder">
+    insert into t_zxorder (zxoid, xmname, uid, 
+      dname, xmprice, createtime, 
+      ostate, cancel)
+    values (#{zxoid,jdbcType=INTEGER}, #{xmname,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, 
+      #{dname,jdbcType=VARCHAR}, #{xmprice,jdbcType=DOUBLE}, #{createtime,jdbcType=DATE}, 
+      #{ostate,jdbcType=INTEGER}, #{cancel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianfeng.entity.TZxorder">
+    insert into t_zxorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zxoid != null">
+        zxoid,
+      </if>
+      <if test="xmname != null">
+        xmname,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="dname != null">
+        dname,
+      </if>
+      <if test="xmprice != null">
+        xmprice,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="ostate != null">
+        ostate,
+      </if>
+      <if test="cancel != null">
+        cancel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zxoid != null">
+        #{zxoid,jdbcType=INTEGER},
+      </if>
+      <if test="xmname != null">
+        #{xmname,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null">
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="xmprice != null">
+        #{xmprice,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="ostate != null">
+        #{ostate,jdbcType=INTEGER},
+      </if>
+      <if test="cancel != null">
+        #{cancel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.TZxorder">
+    update t_zxorder
+    <set>
+      <if test="xmname != null">
+        xmname = #{xmname,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="dname != null">
+        dname = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="xmprice != null">
+        xmprice = #{xmprice,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="ostate != null">
+        ostate = #{ostate,jdbcType=INTEGER},
+      </if>
+      <if test="cancel != null">
+        cancel = #{cancel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where zxoid = #{zxoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianfeng.entity.TZxorder">
+    update t_zxorder
+    set xmname = #{xmname,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      dname = #{dname,jdbcType=VARCHAR},
+      xmprice = #{xmprice,jdbcType=DOUBLE},
+      createtime = #{createtime,jdbcType=DATE},
+      ostate = #{ostate,jdbcType=INTEGER},
+      cancel = #{cancel,jdbcType=INTEGER}
+    where zxoid = #{zxoid,jdbcType=INTEGER}
+  </update>
+
+<select id="selectByContent" resultMap="BaseResultMap">
+  SELECT * FROM t_zxorder WHERE uid = #{uid}
+  <if test=" zxos !=null and zxos !='' ">
+    AND ostate = #{zxos}
+  </if>
+</select>
+
+</mapper>
